@@ -1,12 +1,20 @@
 package tacos.model;
 
-public class Ingredient {
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.Id;
 
+@Entity
+public class Ingredient {
+	@Id
 	private String id;
 	private String name;
+	@Enumerated(value = EnumType.STRING)
 	private Type type;
 	
-	public Ingredient() { }
+	@SuppressWarnings("unused")
+	private Ingredient() { }
 	
 	public Ingredient(String id, String name, Type type) {
 		super();

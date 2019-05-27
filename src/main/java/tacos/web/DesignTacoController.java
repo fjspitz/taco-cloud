@@ -41,8 +41,18 @@ public class DesignTacoController {
 		this.designRepo = designRepo;
 	}
 	
-	@ModelAttribute
-	public void addIngredientsToModel(Model model) {
+	@ModelAttribute(name = "order")
+	public Order order() {
+		return new Order();
+	}
+	
+	@ModelAttribute(name = "design")
+	public Taco taco() {
+		return new Taco();
+	}
+	
+	@GetMapping
+	public String showDesignForm(Model model) { 
 		List<Ingredient> ingredients = new ArrayList<>();
 		
 		ingredientRepo.findAll().forEach(i -> ingredients.add(i));
@@ -53,21 +63,6 @@ public class DesignTacoController {
 			model.addAttribute(type.toString().toLowerCase(), 
 					filterByType(ingredients, type));
 		}
-	}
-	
-	@ModelAttribute(name = "order")
-	public Order order() {
-		return new Order();
-	}
-	
-	@ModelAttribute(name = "taco")
-	public Taco taco() {
-		return new Taco();
-	}
-	
-	@GetMapping
-	public String showDesignForm(Model model) { 
-		model.addAttribute("design", new Taco());
 		
 		return "design-a-taco";
 	}

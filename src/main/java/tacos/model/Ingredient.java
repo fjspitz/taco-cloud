@@ -38,5 +38,10 @@ public class Ingredient {
 	public void setType(Type type) {
 		this.type = type;
 	}
+
+	@Override
+	public String toString() {
+		return "Ingredient [id=" + id + ", name=" + name + ", type=" + type + "]";
+	}
 	
 }

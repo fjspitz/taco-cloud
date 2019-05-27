@@ -1,89 +1,98 @@
 package tacos.model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.CreditCardNumber;
 
 public class Order {
 	private Long id;
-	@NotBlank(message = "Name is required")
-	private String name;
+	@NotBlank(message = "Delivery name is required")
+	private String deliveryName;
 	@NotBlank(message = "Street is required")
-	private String street;
+	private String deliveryStreet;
 	@NotBlank(message="City is required")
-	private String city;
+	private String deliveryCity;
+	@Size(min = 2, max = 2)
 	@NotBlank(message="State is required")
-	private String state;
+	private String deliveryState;
 	@NotBlank(message="Zip code is required")
-	private String zip;
+	private String deliveryZip;
 	@CreditCardNumber(message="Not a valid credit card number")
 	private String ccNumber;
 	@Pattern(regexp="^(0[1-9]|1[0-2])([\\/])([1-9][0-9])$", message="Must be formatted MM/YY")
 	private String ccExpiration;
 	@Digits(integer=3, fraction=0, message="Invalid CVV")
 	private String ccCVV;
-	private Date createdAt;
+	private Date placedAt;
+	private List<Taco> tacos = new ArrayList<>();
 	
 	public Order() {
-		this.createdAt = new Date();
+		this.placedAt = new Date();
 	}
 	
-	public Order(String name, String street, String city, String state, String zip, String ccNumber,
+	public Order(String deliveryName, String street, String city, String state, String zip, String ccNumber,
 			String ccExpiration, String ccCVV) {
 		super();
-		this.name = name;
-		this.street = street;
-		this.city = city;
-		this.state = state;
-		this.zip = zip;
+		this.deliveryName = deliveryName;
+		this.deliveryStreet = street;
+		this.deliveryCity = city;
+		this.deliveryState = state;
+		this.deliveryZip = zip;
 		this.ccNumber = ccNumber;
 		this.ccExpiration = ccExpiration;
 		this.ccCVV = ccCVV;
-		this.createdAt = new Date();
+		this.placedAt = new Date();
+	}
+	
+	public void addDesign(Taco design) {
+	    this.tacos.add(design);
 	}
 
-	public String getName() {
-		return name;
+	public String getDeliveryName() {
+		return deliveryName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setDeliveryName(String deliveryName) {
+		this.deliveryName = deliveryName;
 	}
 
-	public String getStreet() {
-		return street;
+	public String getDeliveryStreet() {
+		return deliveryStreet;
 	}
 
-	public void setStreet(String street) {
-		this.street = street;
+	public void setDeliveryStreet(String deliveryStreet) {
+		this.deliveryStreet = deliveryStreet;
 	}
 
-	public String getCity() {
-		return city;
+	public String getDeliveryCity() {
+		return deliveryCity;
 	}
 
-	public void setCity(String city) {
-		this.city = city;
+	public void setDeliveryCity(String deliveryCity) {
+		this.deliveryCity = deliveryCity;
 	}
 
-	public String getState() {
-		return state;
+	public String getDeliveryState() {
+		return deliveryState;
 	}
 
-	public void setState(String state) {
-		this.state = state;
+	public void setDeliveryState(String deliveryState) {
+		this.deliveryState = deliveryState;
 	}
 
-	public String getZip() {
-		return zip;
+	public String getDeliveryZip() {
+		return deliveryZip;
 	}
 
-	public void setZip(String zip) {
-		this.zip = zip;
+	public void setDeliveryZip(String deliveryZip) {
+		this.deliveryZip = deliveryZip;
 	}
 
 	public String getCcNumber() {
@@ -112,16 +121,16 @@ public class Order {
 
 	@Override
 	public String toString() {
-		return "Order [name=" + name + ", street=" + street + ", city=" + city + ", state=" + state + ", zip=" + zip
-				+ ", ccNumber=" + ccNumber + ", ccExpiration=" + ccExpiration + ", date=" + createdAt + "]";
+		return "Order [deliveryName=" + deliveryName + ", street=" + deliveryStreet + ", city=" + deliveryCity + ", state=" + deliveryState + ", zip=" + deliveryZip
+				+ ", ccNumber=" + ccNumber + ", ccExpiration=" + ccExpiration + ", date=" + placedAt + "]";
 	}
 
-	public Date getCreatedAt() {
-		return createdAt;
+	public Date getPlacedAt() {
+		return placedAt;
 	}
 
-	public void setCreatedAt(Date date) {
-		this.createdAt = date;
+	public void setPlacedAt(Date date) {
+		this.placedAt = date;
 	}
 
 	public Long getId() {
@@ -130,6 +139,14 @@ public class Order {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public List<Taco> getTacos() {
+		return tacos;
+	}
+
+	public void setTacos(List<Taco> tacos) {
+		this.tacos = tacos;
 	}
 	
 }

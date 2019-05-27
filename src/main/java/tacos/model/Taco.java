@@ -1,5 +1,6 @@
 package tacos.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -13,14 +14,15 @@ public class Taco {
 	private String name;
 	@NotNull
 	@Size(min = 1, message = "You must choose al least 1 ingredient")
-	private List<String> ingredients;
+	private List<Ingredient> ingredients;
 	private Date createdAt;
 	
 	public Taco() { 
 		this.createdAt = new Date();
+		this.ingredients = new ArrayList<>();
 	}
 
-	public Taco(String name, List<String> ingredients) {
+	public Taco(String name, List<Ingredient> ingredients) {
 		super();
 		this.name = name;
 		this.ingredients = ingredients;
@@ -35,17 +37,12 @@ public class Taco {
 		this.name = name;
 	}
 
-	public List<String> getIngredients() {
+	public List<Ingredient> getIngredients() {
 		return ingredients;
 	}
 
-	public void setIngredients(List<String> ingredients) {
+	public void setIngredients(List<Ingredient> ingredients) {
 		this.ingredients = ingredients;
-	}
-
-	@Override
-	public String toString() {
-		return "Taco [name=" + name + ", ingredients=" + ingredients + "]";
 	}
 
 	public Date getCreatedAt() {
@@ -62,6 +59,11 @@ public class Taco {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	@Override
+	public String toString() {
+		return "Taco [id=" + id + ", name=" + name + ", ingredients=" + ingredients + ", createdAt=" + createdAt + "]";
 	}
 	
 }
